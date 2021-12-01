@@ -1,0 +1,197 @@
+﻿
+@using Microsoft.AspNetCore.Http
+@{ ViewData["Title"] = "ListarCalendario";
+    Layout = null;
+
+}
+@if (!string.IsNullOrEmpty(Context.Session.GetString("Portal.UserName")))
+{
+<script>window.location = "Home";</script>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Presentation</title>
+    <link rel="stylesheet" href="../css/styleBienvenida.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap/bootstrap.bundle.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <header class=" p-0 bg-dark text-white">
+
+        <nav class="navbar-fixed-top" id="navbar" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <a class="navbar-brand ml-2" href="#">
+                    <img src="https://sanpedro.edu.pe/wp-content/uploads/2019/09/sp-logo.png" style="width: 40px; height: 45px;" alt="Colegio San Pedro">
+                    <span id="text-academica">Colegio Ciencias</span>
+                </a>
+
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+
+                <li>
+                    <a asp-controller="Login" asp-action="Index"><button class="btn btn-warning  " id="btn-button"> INGRESAR<em class="fa fa-fw fa-lg fa-sign-in"></em></button></a>
+                </li>
+            </ul>
+
+        </nav>
+    </header>
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Bienvenido al sistema de Colegio Ciencias</h1>
+            <a asp-controller="Bienvenido" asp-action="Map">Contactanos <en class="fas fa-phone"></en></a>
+
+        </div>
+    </section>
+    <br>
+
+    <article class="content">
+
+        <div id="carouselExampleCaptions" class="carousel slide card" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/Img/fondo4.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>First slide label</h5>
+                        <p>Some representative placeholder content for the first slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Img/fondo4.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Second slide label</h5>
+                        <p>Some representative placeholder content for the second slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Img/fondo1.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Third slide label</h5>
+                        <p>Some representative placeholder content for the third slide.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <div class="card-calendario">
+
+            <div id="CalendarioAcademico" class="col-md-12">
+                <div class="ibox">
+
+                    <div class="text-left m-2">
+
+                        <h8 class="text-right" style="color:blue;">Actividades del Calendario Académico</h8>
+
+                    </div>
+                    <div class="ibox-content no-padding">
+
+                        <table id="tableAcademicCalendar" class="table table-sm table-hover table-events-academy table-bordered text-12">
+                            <caption>Calendario</caption>
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="text-center" style=" width:20%; " scope="col" colspan="2" rowspan="1">FECHA</th>
+                                    <th scope="col" class="text-center" style=" width:80%; " scope="col">DETALLE</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="contenido">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </article>
+    <br>
+    <br />
+    <br />
+
+
+    <footer class=" text-center text-white" style="background-color:black">
+        <!-- Grid container -->
+        <div class="container p-1 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-2">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <en class="fab fa-facebook-f"></en>
+                </a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <en class="fab fa-twitter"></en>
+                </a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <en class="fab fa-google"></en>
+                </a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <en class="fab fa-instagram"></en>
+                </a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <en class="fab fa-linkedin-in"></en>
+                </a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <en class="fab fa-github"></en>
+                </a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+        <!-- Copyright -->
+        <div class="text-center p-1" style="background-color: black;">
+            © 2021 Copyright:
+            <a class="text-white" href="https://mdbootstrap.com/">Sistema de Colegio</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+
+    <script src="~/js/BienvenidaScript.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            ListarCalendarioBienvenida();
+        });
+
+    </script>
+
+    <script src="https://kit.fontawesome.com/edb50c3e17.js" crossorigin="anonymous"></script>
+</body>

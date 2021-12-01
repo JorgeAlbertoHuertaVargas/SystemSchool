@@ -1,0 +1,158 @@
+﻿@model Entities.Entities.Levell
+
+@{
+    ViewBag.Title = "Crear";
+}
+
+
+
+<br />
+<span id="Message" class="d-none">@TempData["Mensaje"]</span>
+<span id="MessageInfo" class="d-none">@TempData["MensajeInfo"]</span>
+<div class="row" style="width:100%;">
+
+    <div class="col-6 ">
+        <h2 class="text-primary">Listado de Nivel</h2>
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" class="btn btn-info form-control" data-toggle="modal" data-target="#Levell">Registar</button>
+
+    </div>
+
+</div>
+
+
+<div class="row m-4">
+    <div class="col-sm-12">
+        <div class="card  shadow">
+            <div class="card-header py-2" style="background: #d12d7b; ">
+                <h8 class="card-title" style="color:white;">Welcomen Level</h8>
+            </div>
+            <div class="card-body">
+                <table class="table table-responsive-sm ">
+                    <caption>NIVEL</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">N°</th>
+                            <th scope="col">Nombre Level</th>
+                            <th scope="col">Turno</th>
+                            <th scope="col">Acciones</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody id="Datos">
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="Levell" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Registrar Level</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label class="col-form-label">Nombre Nivel:</label>
+                        <input asp-for="Levelname" class="form-control" placeholder="Nombre Nivel">
+                        <span asp-validation-for="Levelname" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Turno:</label>
+                        <input asp-for="Turn" class="form-control" placeholder="Turno">
+                        <span asp-validation-for="Turn" class="text-danger"></span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="Toastr">Registrar</button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="modal fade" id="EditarLevel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><em class="fas fa-pencil-alt"></em>Editar Level</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="hidden" name="id" id="idLevel" />
+                        <label class="col-form-label">Nombre Nivel:</label>
+                        <input id="EditarName" name="EditarName" class="form-control" placeholder="Nombre Nivel">
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Turno:</label>
+                        <input id="EditarTurno" name="EditarTurno" class="form-control" placeholder="Turno">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" onclick="Update_Level();">Registrar</button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts{
+
+    <partial name="_ValidationScriptsPartial">
+
+        <script src="~/js/Level.js"></script>
+
+        <script>
+            $(document).ready(function () {
+
+                listar_Levell();
+                var message = $('#Message').text();
+                var messageInfo = $('#MessageInfo').text();
+
+                if (message == 'Successfully') {
+                    toastr.success("Your request has been successfully added.", 'Success Alert', { timeout: 100 });
+                }
+            })
+        </script>
+
+
+}

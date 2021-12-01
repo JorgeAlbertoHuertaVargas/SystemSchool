@@ -1,0 +1,100 @@
+﻿@model Entities.Entities.Calendario
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div id="ErrorAlert" class="alert alert-danger" style="display:none" role="alert">
+    <small id="Mensenger"></small>
+</div>
+<div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4" style="border-radius:10px">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 id="titlenew" class="text" style="color: #7F8C8D "> <strong><em class="fa fa-calendar" aria-hidden="true"></em> Registrar Calendario</strong></h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+
+                <form method="post">
+
+                    <input id="IdDegree" class="form-control input-sm" hidden />
+
+                    <div class="form-group">
+                        <label>Fecha Inicio</label>
+                        <input type="date" asp-for="FechaInicial" id="fechaInicio" class="form-control input-sm" autofocus />
+                        <span class="text" style="color:deeppink"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Final</label>
+                        <input type="date" asp-for="FechaFinal" id="fechaFinal" class="form-control input-sm" autofocus />
+                        <span class="text" style="color:deeppink"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Descripcion</label>
+                        <textarea style="width: 100%; " asp-for="Detalle" id="Descripción"></textarea>
+
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn" style="background: #7F8C8D "><strong style="color:azure">Save</strong></button> &nbsp;&nbsp;
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Pie Chart -->
+    <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4" style="border-radius:10px">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text" style="color: #7F8C8D "><strong><em class="fas fa-list"></em> Calendario</strong></h6>
+
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <div class=" table-responsive">
+                        <table class="table table-sm  table-responsive-sm" id="htmlTable" style=" border-collapse: collapse;">
+                            <caption>Calendario</caption>
+                            <thead class=" thead-drak" style="color: #ffffff; background-color: #ea899a ">
+                                <tr>
+                                    <th scope="col">N°</th>
+                                    <th scope="col">Fecha Inicio</th>
+                                    <th scope="col">Fecha Final</th>
+                                    <th scope="col">Descripcion</th>
+                                    <th scope="col">Acci&oacute;n</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="contenido">
+                            </tbody>
+                        </table>
+                    </div>
+           
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="/js/SectionScrip.js"></script>
+    <script src="/js/Calendario.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            ListarCalendario();
+        });
+
+    </script>
+
+
+}

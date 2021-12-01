@@ -1,0 +1,351 @@
+﻿@using Entities.Entities
+@using Presentation.Models.Language
+@{
+    ViewBag.Title = "Registrar Alumno";
+    Alumno alumno = new Alumno();
+    LanguageModelButtons LanguageButtons = new LanguageModelButtons().GetLanguageForView();
+
+}
+
+<div class="col-sm-12">
+
+    <div class="card shadow">
+        <div class="card">
+            <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text" style="color: #7F8C8D "><en class="fas fa-user-graduate"></en> Registrar Alumnos</h6>
+
+            </div>
+
+                <div class="card-body">
+
+                    <div class="container">
+                        <div>
+                            <ul class="nav nav-pills">
+                                <li class="active">
+                                    <a href="#">Datos Alumnos</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                          <input type="hidden" id="IdRol" value="4" />
+                            <div class="mb-3 mt-4 row justify-content-end">
+                                <label for="inputPassword" class="col-sm-auto col-form-label focus">@LanguageButtons.Codigo</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputCodigo" value="0021758658" required>
+                                    <div class="invalid-feedback">
+                                        Please choose a Code.
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="mb-3 row justify-content-end">
+                                <label for="inputPassword" class="col-sm-auto col-form-label">@LanguageButtons.Nombres</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputNombreAlumno" required>
+                                    <div id="NombreExiste" style='color: #dc3545; font-size: 80%; '></div>
+                                    <div id="NombreExistes" style='color: green; font-size: 80%; '></div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row justify-content-end">
+                                <label for="inputPassword" class="col-sm-auto col-form-label">@LanguageButtons.Apellidos</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputApellido" value="Cerna Espinoza" required>
+                                    <div class="invalid-feedback">
+                                        Please choose a Last Name.
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="mb-4 row justify-content-end">
+                                <label for="inputPassword" class="col-sm-auto col-form-label">@LanguageButtons.Correo</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="InputCorreoAlumno" value="Nimer@hotmail.com" required>
+                                    <div class="invalid-feedback">
+                                        Please choose a  Email.
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="mb-1 row justify-content-end">
+                                <label for="inputPassword" class="col-sm-auto col-form-label">@LanguageButtons.Contrasena</label>
+                                <div class="col-sm-7">
+                                    <input type="password" class="form-control" id="display" required>
+                                    <span class="fas fa-eye" id="BotonEye" style="font-size:20px;cursor:pointer;position: relative;top: -27.5px;right: 10px;float:right;color: #888888"></span>
+                                    <div id="ErrorP" style='color: #dc3545; font-size: 80%; '> </div>
+                                    <div id="SuccessP" style='color: green; font-size: 80%; '> </div>
+                                </div>
+
+                                <script>
+                                    var boton = document.getElementById('BotonEye');
+                                    var input = document.getElementById('display');
+
+                                    boton.addEventListener('click', mostrarContraseña);
+                                    function mostrarContraseña() {
+
+                                        if (input.type == "password") {
+                                            input.type = "text";
+                                            boton.className = "fas fa-eye-slash";
+
+                                            setTimeout("ocultar()", 3000);
+
+                                        } else {
+                                            input.type = "password";
+                                            boton.className = "fas fa-eye";
+                                        }
+                                    }
+
+                                    function ocultar() {
+                                        input.type = "password";
+                                        boton.className = "fas fa-eye";
+                                    }
+                                </script>
+                                <div class="col-sm-3 justify-content-center">
+                                    <button type="button" onclick="generate();" class="purple-gradient btn-block" style="color: aliceblue; border: none; height:36px;">Generate Password</button>
+
+                                    <script>
+
+                                        function generate() {
+
+                                            let complexity = 16;
+
+                                            let values = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!()?+*[]{}/$%&#";
+
+                                            let password = "";
+                                            for (var i = 0; i <= complexity; i++) {
+                                                password += values.charAt(Math.floor(Math.random() * Math.floor(values.length - 1)));
+                                            }
+                                            document.getElementById("display").value = password;
+                                            document.getElementById("ConfirmarAlumno").value = password;
+
+                                        }
+                                    </script>
+                                </div>
+
+                            </div>
+                            <div class="mb-2 row justify-content-end">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">@LanguageButtons.ConfirmarContrasena</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="ConfirmarAlumno" required>
+                                    <span class="fas fa-eye" id="BotonEyeConfirmar" style="font-size:20px;cursor:pointer;position: relative;top: -27.5px;right: 10px;float:right;color: #888888"></span>
+                                    <div id="Error" style='color: #dc3545; font-size: 80%; '> </div>
+                                    <div id="Success" style='color: green; font-size: 80%; '> </div>
+
+                                </div>
+
+                            </div>
+                            <script>
+                                var botonConfirmar = document.getElementById('BotonEyeConfirmar');
+                                var inputConfirmar = document.getElementById('ConfirmarAlumno');
+
+                                botonConfirmar.addEventListener('click', mostrarContraseñaConfirmar);
+                                function mostrarContraseñaConfirmar() {
+
+                                    if (inputConfirmar.type == "password") {
+                                        inputConfirmar.type = "text";
+                                        botonConfirmar.className = "fas fa-eye-slash";
+
+                                        setTimeout("ocultarConfirmar()", 3000);
+
+                                    } else {
+                                        inputConfirmar.type = "password";
+                                        botonConfirmar.className = "fas fa-eye";
+                                    }
+                                }
+
+                                function ocultarConfirmar() {
+                                    inputConfirmar.type = "password";
+                                    botonConfirmar.className = "fas fa-eye";
+                                }
+                            </script>
+
+                            <div class="mb-3 row justify-content-end">
+                                <label for="inputPassword" class="col-sm-auto col-form-label">@LanguageButtons.Grado </label>
+                                <div class="col-sm-4">
+
+                                    <select class="form-control" id="GradoAlumno" required>  </select>
+                                    <div class="invalid-feedback">
+                                        Please select a valid Degree.
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+
+                                </div>
+
+                                <label for="inputPassword" class="col-sm-auto col-form-label">@LanguageButtons.Seccion</label>
+                                <div class="col-sm-5">
+                                    <input type="hidden" id="idUsers" />
+                                    <select class="form-control" id="DatosSeccion" required></select>
+                                    <div class="invalid-feedback">
+                                        Please select a valid Section.
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <input type="hidden" id="ApoderadoId" value="" required />
+
+                            <div class="mb-3 row justify-content-end">
+                                <label for="inputPassword" class="col-sm-auto col-form-label">@LanguageButtons.Apoderado</label>
+                                <div class="col-sm-10">
+                                    <ul class="nav nav-pills">
+                                        <li class="asignar-encarg actives" data="0"><a data-toggle="pill" href="#home">No asignar</a></li>
+                                        <li class="asignar-encarg " data="1"><a data-toggle="pill" href="#menu1">Crear nuevo</a></li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div id="home" class="tab-pane fade actives in"></div>
+                                        <div id="menu1" class="tab-pane fade">
+                                            <div class="mb-4 mt-3 row justify-content-end">
+                                                <label for="inputPassword" class="col-sm-auto control-label">DNI</label>
+                                                <div class="col-sm-7">
+                                                    <input class="form-control" id="ConsultDNI" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter a valid value.
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 justify-content-center">
+                                                    <button id="ButtnSearch" type="button"  class="purple-gradient btn-block ButtnSearch" style="color: aliceblue; border: none; height:36px;"><i class="fa fa-search" aria-hidden="true"></i> Filtrar</button>
+                                                </div>
+
+                                            </div>
+                                            <div class="mb-3 row justify-content-end">
+                                                <label for="inputPassword" class="col-sm-auto col-form-label">Nombres</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" id="inputNombre" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter a valid value.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row justify-content-end">
+                                                <label for="inputPassword" class="col-sm-auto col-form-label">Apellido Paterno</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" id="inputApellidoP" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter a valid value.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row justify-content-end">
+                                                <label for="inputPassword" class="col-sm-auto col-form-label">Apellido Materno</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" id="inputApellidoM" required>
+                                                    <div class="invalid-feedback">
+                                                        Please enter a valid value.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3 row justify-content-end">
+                                                <label for="inputPassword" class="col-sm-auto col-form-label">Telefono</label>
+                                                <div class="col-sm-9">
+                                                    <input class="form-control" id="inputTelefono">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row justify-content-end">
+                                                <label for="inputPassword" class="col-sm-auto col-form-label">Parentesco</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" id="parentesco" required>
+                                                        <option selected disabled value="">Selecionar</option>
+                                                        <option value="Papá">Papá</option>
+                                                        <option value="Mamá">Mamá</option>
+                                                        <option value="Hermano(a)">Hermano(a)</option>
+                                                        <option value="Tio(a)">Tio(a)</option>
+                                                        <option value="Abuelo(a)">Abuelo(a)</option>
+                                                        <option value="Tutor(a)">Tutor(a)</option>
+                                                        <option value="Amigo(a)">Amigo(a)</option>
+
+                                                    </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select a valid state.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div id="Cheknames" class="alert alert-danger" style="display:none" role="alert">
+                                <en class="fas fa-exclamation-triangle"></en> <strong>ERROR:</strong> Por favor rellena el formulario correctamente.
+                            </div>
+                            <div id="Chekname" class="alert alert-danger" style="display:none" role="alert">
+                                <en class="fas fa-exclamation-triangle"></en> <strong>ERROR:</strong> El Estudiante ya Existe !!
+                            </div>
+                            <div id="Comparacion" class="alert alert-danger" style="display:none" role="alert">
+                                <en class="fas fa-exclamation-triangle"></en> <strong>ERROR:</strong> La contraseña es diferente !!
+                            </div>
+
+                            <br />
+
+                            <div style="text-align: center;">
+
+                                <button class="btn btn-dark btn-register"><en class="fas fa-check-double"></en> @LanguageButtons.Register</button>
+
+                            </div>
+
+                    </div>
+
+                </div>
+
+
+            <script>
+                (function () {
+                    'use strict'
+
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.querySelectorAll('.needs-validation')
+
+                    // Loop over them and prevent submission
+                    Array.prototype.slice.call(forms)
+                        .forEach(function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                }
+
+                                form.classList.add('was-validated')
+                            }, false)
+                        })
+                })();
+            </script>
+
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/ApiScript.js"></script>
+    <script src="~/js/Alumno.js"></script>
+    <script>
+        $(document).ready(function () {
+            listar_Seccion();
+            listar_Grado();
+        })
+
+    </script>
+
+}
+

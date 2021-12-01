@@ -1,0 +1,96 @@
+﻿
+@model Entities.Entities.Teacher
+@{
+    ViewBag.Title = "Registrar Docente";
+    //Layout = null;
+}
+
+<div class="col-sm-12">
+
+    <div class="card">
+        <div class="card-header" style="background: #d12d7b; ">
+            <h8 class="card-title" style="color:white;"><em class="fa fa-users"></em> Registrar Docentes</h8>
+        </div>
+
+        <div class="card-body">
+            <div class="container">
+
+                <div>
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#">Datos Docente</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-row">
+                    @*<form method="post" class="form-row">*@
+                    <input type="hidden" id="idUsers" />
+                    <div class="col-md-4 mb-3">
+                        <label for="name" class="form-label">Codigo</label>
+                        <input type="text" class="form-control" id="inputCode" required>
+                    </div>
+                    <input type="hidden" id="idRol" value="3" />
+                    <div class="col-md-4 mb-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="inputName" required>
+                        <div class="valid-feedback">Ok válido</div>
+                        <div class="invalid-feedback">Complete el campo</div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="inputLastName" required>
+                        <div class="valid-feedback">Ok válido</div>
+                        <div class="invalid-feedback">Complete el campo</div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="phone" class="form-label">Telefono</label>
+                        <input type="text" class="form-control" id="inputPhone" required>
+                        <div class="valid-feedback">Ok válido</div>
+                        <div class="invalid-feedback">Complete el campo</div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="username" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" id="inputUser" required>
+                        <div class="valid-feedback">Ok válido</div>
+                        <div class="invalid-feedback">Complete el campo</div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="inputPass" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="inputPass" required>
+                        <div class="valid-feedback">Ok válido</div>
+                        <div class="invalid-feedback">Complete el campo</div>
+                    </div>
+                    <div id="Chekname" class="alert alert-danger" style="display:none" role="alert">
+                        El Nombre de Usuario o Codigo ya Existe !!
+                    </div>
+                    <div id="validationform" class="alert alert-danger" style="display:none" role="alert">
+                        Por favor rellene todo los campos !!
+                    </div>
+                    @*<div style="text-align: center;">
+                            <em class="fas fa-check-double"></em><input type="submit" class="btn btn-primary btn-register fas fa-check-double" value="Registrar!" />
+                        </div>*@
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-danger btn-regresar"><em class="fas fa-undo"></em> Regresar</button>
+                        <button type="submit" class="btn btn-primary btn-register"><em class="fas fa-check-double"></em> Registrar</button>
+                    </div>
+                    @*</form>*@
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    @section scripts{
+        <script src="~/js/TeacherScript.js"></script>
+        <script>
+            $(document).ready(function () {
+                valideKey();
+            })
+        </script>
+    }
+

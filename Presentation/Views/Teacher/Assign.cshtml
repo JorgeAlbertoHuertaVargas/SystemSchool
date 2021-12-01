@@ -1,0 +1,167 @@
+﻿@model IEnumerable<Entities.Entities.Teacher>
+@{
+    ViewBag.Title = "Asignar Curso Docente";
+
+    //Alumno alumno = new Alumno();
+    //Apoderado apoderado = new Apoderado();
+
+}
+
+
+<div class="col-sm-12">
+
+    <section class="content-header">
+
+        @*<div>
+            <h2>
+                Cursos del Maestro(a): @ViewData["name"],@ViewData["lastname"]
+            </h2>
+        </div>*@
+        <div>
+            <ol class="breadcrumb">
+                <li><a href="../Section"><em class="fa fa-fw fa-home"></em>Inicio/</a></li>
+                <li><a asp-action="Index"> Maestro /</a></li>
+                <li><a href="#"> Cursos del Maestro(a): /</a></li>
+                <li>
+                    <a href="#"> @ViewData["name"], @ViewData["lastname"]</a>
+                    
+                </li>
+
+            </ol>
+
+        </div>
+
+    </section>
+
+
+    <div class="card">
+        <div class="card-header" style="background: #d12d7b; ">
+            <h8 class="card-title" style="color:white;"><em class="fa fa-users"></em> Asignar Curso Docentes</h8>
+        </div>
+
+        <div class="card-body">
+            <div class="container">
+
+                <div>
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#">Datos Docente</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <input type="hidden" name="id" id="comboTeacher" value="@ViewData["id"]" />
+                        <label for="code" class="form-label">Turno</label>
+                        <select id="comboTurno" class="form-control" required="">
+                            <option>Selecciona</option>
+                            <option value="MAÑANA">MAÑANA</option>
+                            <option value="TARDE">TARDE</option>
+
+                        </select>
+                        <div class="valid-feedback">Ok válido</div>
+                        <div class="invalid-feedback">Complete el campo</div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="code" class="form-label">Nivel</label>
+                        <select id="comboNivel" class="form-control" @*asp-items="@(new SelectList(ViewBag.Roles,"IdRole","RoleName"))"*@ disabled>
+                            <option value="">Seleccione</option>
+                        </select>
+                        <div class="valid-feedback">Ok válido</div>
+                        <div class="invalid-feedback">Complete el campo</div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="code" class="form-label">Grado</label>
+                        <select id="comboGrado" class="form-control" @*asp-items="@(new SelectList(ViewBag.Roles,"IdRole","RoleName"))"*@ disabled>
+                            <option value="">Seleccione</option>
+                        </select>
+                        <div class="valid-feedback">Ok válido</div>
+                        <div class="invalid-feedback">Complete el campo</div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="code" class="form-label">Curso</label>
+                        <select id="comboCurso" class="form-control" @*asp-items="@(new SelectList(ViewBag.Roles,"IdRole","RoleName"))"*@ disabled>
+                            <option value="">Seleccione</option>
+                        </select>
+                        <div class="valid-feedback">Ok válido</div>
+                        <div class="invalid-feedback">Complete el campo</div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="code" class="form-label">Sección</label>
+                        <select id="comboSeccion" class="form-control" @*asp-items="@(new SelectList(ViewBag.Roles,"IdRole","RoleName"))"*@ disabled>
+                            <option value="">Seleccione</option>
+                        </select>
+                        <div class="valid-feedback">Ok válido</div>
+                        <div class="invalid-feedback">Complete el campo</div>
+                    </div>
+
+
+                </div>
+                <div id="validationform" class="alert alert-danger" style="display:none" role="alert">
+                    Por favor complete todo los campos !!
+                </div>
+                <div style="text-align: center;">
+                    @*<button type="submit" class="btn btn-danger btn-regresar"><em class="fas fa-undo"></em> Regresar</button>*@
+                    <button type="submit" class="btn btn-primary" id="btn-register-assign" disabled><em class="fas fa-check-double"></em> Registrar</button>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row m-4">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header" style="background: #d12d7b; ">
+                <h8 class="card-title" style="color:white; text-align:center">Listado de Cursos Asignados</h8>
+            </div>
+            <div class="card-body">
+                <table aria-label="Table_AssignTeacher" class="table table-responsive-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                Turno
+                            </th>
+                            <th scope="col">
+                                Nivel
+                            </th>
+                            <th scope="col">
+                                Grado
+                            </th>
+                            <th scope="col">
+                                Sección
+                            </th>
+                            <th scope="col">
+                                Curso
+                            </th>
+                            <th scope="col">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="Lista">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="~/js/LevelDegreeCourseSection.js"></script>
+    <script>
+            $(document).ready(function () {
+                List_Assign();
+            })
+
+    </script>
+
+}

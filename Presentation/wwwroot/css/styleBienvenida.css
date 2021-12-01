@@ -1,0 +1,156 @@
+
+
+#text-academica, .welcome-message{
+    font-family: 'Carattere', cursive;
+    color: aliceblue;
+    margin-right: auto;
+    font-size: 22px;
+
+}
+#navbar {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.navbar-header{
+    padding: -10px 0px;
+}
+
+#btn-button{
+    position: relative;
+    padding: 10px 15px;
+}
+
+
+.banner{
+    position: relative;
+    width: 100%;
+    height: calc(50vh - 50px);
+    background-color: #f5f5f5;
+    background-size: cover;
+    background-position: center;
+    transition: all .1s ease-in-out;
+    background-image: url(../Img/fondo.jpg);
+    animation: banner 28s infinite linear;
+
+}
+.banner-content{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background-color: rgb(0,22,40, .6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.banner-content h1{
+
+    margin: 0;
+    padding: 0;
+    padding-bottom: 30px;
+    font-size: 40px;
+    text-align: center;
+
+}
+.banner-content a{
+    color: #FFF;
+    padding: 9px 20px;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    transition: all .3s ease-in-out;
+    text-decoration: none;
+}
+
+    .banner-content a:hover {
+        background-color: #fff;
+        text-decoration: none;
+        color: #333;
+    }
+
+@keyframes banner {
+
+    0% {
+        background-image: url(../Img/fondo.jpg);
+    }
+
+    25% {
+        background-image: url(../Img/fondo.jpg);
+    }
+
+    26% {
+        background-image: url(../Img/fondo4.jpg);
+    }
+
+    50% {
+        background-image: url(../Img/fondo4.jpg);
+    }
+
+    51% {
+        background-image: url(../Img/fondo1.jpg);
+    }
+
+    75% {
+        background-image: url(../Img/fondo1.jpg);
+    }
+
+    76% {
+        background-image: url(../Img/fondo2.jpg);
+    }
+
+    100% {
+        background-image: url(../Img/fondo2.jpg);
+    }
+}
+
+.content{
+
+    position:relative;
+    width: 100%;
+    height: 630px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: auto;
+}
+
+.content .card{
+    width: 720px;
+    height: 630px;
+    border-radius: 8px;
+    box-shadow: 0 2px  rgb(0,0,0,0.2);
+    overflow: hidden;
+    margin: 10px;
+    text-align: center;
+    transition: all 0.25s;
+}
+
+.content .card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 12px 16px rgb(0,0,0,0.2);
+}
+
+.content .card img{
+    width: 720px;
+    height: 640px;
+} 
+
+.content .card-calendario{
+    width: 720px;
+    height: 480px;
+    border-radius: 8px;
+    box-shadow: 0 2px 16px rgb(0,0,0,0.2);
+    margin: 10px;
+    text-align: center;
+    transition: all 0.25s;
+}
+

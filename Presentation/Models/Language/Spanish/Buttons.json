@@ -1,0 +1,23 @@
+{
+  "Register": "Registrar",
+  "Edit": "Editar",
+  "Delete": "Borrar",
+  "Cancel": "Cancelar",
+  "Reset": "Reiniciar",
+  "Title": "Lista Nivel",
+  "Codigo": "Codigo",
+  "Nombres": "Nombres",
+  "Apellidos": "Apellidos",
+  "Correo": "Correo",
+  "Contrasena": "Contraseña",
+  "ConfirmarContrasena": "Confirmar Contraseña",
+  "Grado": "Grado",
+  "Seccion": "Seccion",
+  "Apoderado": "Apoderado",
+  "Accion": "Accion",
+  "Telefono": "Telefono",
+  "Usuario": "Usuario",
+  "List_Teacher": "Listado de Docentes",
+  "Table_Teachers": "Tabla de Maestros",
+  "Add_Teacher": "Agregar Maestro"
+}

@@ -1,0 +1,140 @@
+﻿@model List<Entities.Entities.ParametersSystem>
+
+@{
+    ViewData["Title"] = "Parámetros del Sistema";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3>Configuraciones de Sistema</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <caption>IDIOMA</caption>
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var @parameter in @Model)
+                {
+                    <tr>
+                        <th scope="col" scope="row">@parameter.Id</th>
+                        <th scope="col">@parameter.Type</th>
+                        <td>
+                            @{
+                                switch (parameter.Value)
+                                {
+                                    case "English":
+                                        <span>Inglés</span>
+                                        break;
+                                    case "Spanish":
+                                        <span>Español</span>
+                                        break;
+                                    case "Portuguese":
+                                        <span>Portugués</span>
+                                        break;
+                                }
+                            }
+                        </td>
+                        <td>
+                            @if (parameter.State)
+                            {
+                                <span>ACTIVADO</span>
+                            }
+                            else
+                            {
+                                <span>DESACTIVADO</span>
+                            }
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_@parameter.Id">Editar</button>
+                            <!-- Modal Value -->
+                            <div class="modal fade" id="modal_@parameter.Id" tabindex="-1" role="dialog" aria-labelledby="@parameter.Id" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <form asp-action="Update">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <input type="hidden" name="id" value="@parameter.Id" />
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="@parameter.Id">Editar @parameter.Type</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-row">
+                                                    <div class="form-group col">
+                                                        @if (parameter.Id == 1)
+                                                        {
+                                                            <select class="custom-select" name="value">
+                                                                @{
+                                                                    switch (parameter.Value)
+                                                                    {
+                                                                        case "English":
+                                                                            <option value="English" selected>Inglés</option>
+                                                                            <option value="Spanish">Español</option>
+                                                                            <option value="Portuguese">Portugués</option>
+                                                                            break;
+                                                                        case "Spanish":
+                                                                            <option value="English">Inglés</option>
+                                                                            <option value="Spanish" selected>Español</option>
+                                                                            <option value="Portuguese">Portugués</option>
+                                                                            break;
+                                                                        case "Portuguese":
+                                                                            <option value="English">Inglés</option>
+                                                                            <option value="Spanish">Español</option>
+                                                                            <option value="Portuguese" selected>Portugués</option>
+                                                                            break;
+                                                                        default:
+                                                                            <option value="English" selected>Inglés</option>
+                                                                            <option value="Spanish">Español</option>
+                                                                            <option value="Portuguese">Portugués</option>
+                                                                            break;
+                                                                    }
+                                                                }
+                                                            </select>
+                                                        }
+                                                        else
+                                                        {
+                                                            <input class="form-control" name="value" type="text" value="@parameter.Value" />
+                                                        }
+                                                    </div>
+                                                    <div class="form-group col">
+                                                        <select class="custom-select" name="state">
+                                                            @if (parameter.State)
+                                                            {
+                                                                <option value="1" selected>ACTIVADO</option>
+                                                                <option value="0">DESACTIVADO</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="1">ACTIVADO</option>
+                                                                <option value="0" selected>DESACTIVADO</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
+                                                <button type="reset" class="btn btn-secondary">Reestablecer</button>
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

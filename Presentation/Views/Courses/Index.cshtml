@@ -1,0 +1,145 @@
+﻿@using Entities.Entities
+
+@*@model Entities.Entities.Section  #05ccc4*@
+
+@{
+    ViewData["Title"] = "Index";
+    Course Cursos = new Course();
+}
+
+<div id="ErrorAlert" class="alert alert-danger" style="display:none" role="alert">
+    <small id="Mensenger"></small>
+</div>
+
+<div class="row">
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4" style="border-radius:10px">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 id="titlenew" class="text" style="color: #7F8C8D "> <strong>New corse</strong></h6>
+                <h6 id="titleEdit" style="display:none" class="text-info"> <strong>Edit corse</strong></h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <form id="AjaxForm" autocomplete="false" onsubmit="return false" action="#">
+
+                        <input type="hidden" asp-for="@Cursos.IdCourse" id="IdCourse" />
+                        <div class="form-group">
+                            <label class="control-label"> Course Name</label>
+                            <input asp-for="@Cursos.CourseName" class="form-control" id="CourseName" autofocus />
+                            <span asp-validation-for="@Cursos.CourseName" class="text" style="color:deeppink"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Date Create</label>
+                            <input type="text" asp-for="@Cursos.CourseDateCreated" class="form-control" id="CourseDateCreated" readonly />
+                            <span asp-validation-for="@Cursos.CourseDateCreated" class="textr" style="color:deeppink"></span>
+                        </div>
+                        <div class="form-group">
+
+                            <button id="ButtCreat" onclick="RegistrarCursos();" class="btn" style="background: #7F8C8D "><strong style="color:azure">Save</strong></button> &nbsp;&nbsp;
+                            <button id="ButtUpdate" style="display:none" onclick="ActualizarCursos();" class="btn btn-info"> Update </button> &nbsp;&nbsp;
+                            <button id="ButtLipiar" style="display: none; background: #e4007c " onclick="ButtCancelar();" class="btn"> Clear </button>
+                        </div>
+
+                    </form>
+                </div>
+                <div id="Chekname" class="alert alert-danger" style="display:none" role="alert">
+                    Name already exists!
+                </div>
+                <div id="ExitoAlert" class="alert alert-success" style="display:none" role="alert">
+                    successful registration
+                </div>
+                <div id="LLeneCmpVacio" class="alert alert-warning" style="display:none" role="alert">
+                    Fill in the empty fields!
+                </div>
+                <div id="NoAction" class="alert alert-info" style="display:none" role="alert">
+                    The action was not!
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4" style="border-radius:10px">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text" style="color: #7F8C8D ">List Courses</h6>
+                <div class="dropdown no-arrow">
+                    <input id="BuscadorFilter" class="input-sm" style="display: none; border-radius: 10px; border: 1px solid #ff1493; " onkeyup="Buscar();" />
+                    <a class="dropdown-toggle" onclick="Actibarbuscador();">
+                        <em class="fas fa-search fa-sm " style="color: #ff1493"></em>
+                    </a>
+                </div>
+            </div>
+
+            <style>
+                #htmlTable {
+                    border-collapse: collapse;
+                }
+
+                    #htmlTable thead.thead-drak {
+                        background-color: #ea899a;
+                        color: #ffffff;
+                    }
+            </style>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <div class=" table-responsive">
+                        <table class="table table-sm " id="htmlTable" style=" border-collapse: collapse;">
+                            <caption>Cursos activos</caption>
+                            <thead class=" thead-drak" style="color: #ffffff; background: #ea899a">
+
+                                <tr>
+                                    <th scope="col">N°</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Acci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaCursos">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="container" style=" height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <img class="item" id="loader" src="~/Img/Loading_2.gif" alt="" style="width: 50px; height: 50px; display: none">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*https://getwaves.io/*@
+
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/CourseScript.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            ListarCursos();
+            fechaCreate();
+
+        })
+                                        /*
+$("#CourseName").blur(function () {
+if ($("#CourseName").val() != '') {
+$(this).css("background-color", "#FFCCCC");
+enableBtn();
+}
+});
+
+function disableBtn() {
+document.getElementById("ButtCreat").disabled = true;
+}
+
+function enableBtn() {
+document.getElementById("ButtCreat").disabled = false;
+}*/
+
+    </script>
+}

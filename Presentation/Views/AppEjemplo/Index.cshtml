@@ -1,0 +1,71 @@
+﻿@using Entities.Entities
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<div id="buttCreate" class="">
+    <div class="alert  alert-info" role="alert" _bl_1099="">
+        <button class="btn btn-sm" style="float: right;">
+            <i class="oi oi-plus" aria-hidden="true"></i>?
+        </button>
+        <h5>WELCOME VIEW API</h5>
+    </div>
+</div>
+
+
+<form id="AjaxForm" autocomplete="false" onsubmit="return false" action="#">
+    <div class="row m-4">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>INGRESE SU DNI:</label>
+                            <input type="number" id="textDeni" class="form-control input-sm" value="33562458" autofocus />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group float-right">
+                        <button onclick="Verificar_DNI()" type="submit" class="btn btn-info">Verificar</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <script>
+    function Verificar_DNI() {
+        var DNItext = $('#textDeni').val();
+        if (DNItext.length == 0) {
+            return Swal.fire("Mensaje De Advertencia", "Ingrese numero DNI", "warning");
+        }
+        
+
+        if (DNItext.length > 8 || DNItext.length < 8) {
+            return Swal.fire("Mensaje De Advertencia", "Ingrese un DNI valido!!", "warning");
+        }
+
+        $.ajax({
+            "url": "@Url.Action("Consulta_DNI", "AppEjemplo")",
+            type: 'POST',
+            data: {
+                DNItext: DNItext
+            }
+        }).done(function (resp) {
+            console.log(resp);
+
+
+        })
+    }
+
+    </script>
+
+}

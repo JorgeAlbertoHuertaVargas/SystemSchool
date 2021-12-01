@@ -1,0 +1,86 @@
+﻿@using Microsoft.AspNetCore.Http
+@model Entities.Entities.User;
+@{ ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+@if (!string.IsNullOrEmpty(Context.Session.GetString("Portal.UserName")))
+{
+    <script>window.location = "/";</script>
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>login</title>
+    <link rel="stylesheet" type="text/css" href="~/css/Login/plantilla.css">
+</head>
+<body>
+
+    <div id="ErrorAlert" class="alert alert-danger" style="display:none" role="alert">
+        <small id="Mensenger"></small>
+    </div><br /><br />
+    <div class="contenido">
+
+        <fieldset>
+            <legend></legend>
+            <div class="center">
+                <img src="~/Img/images.png" style="width:80px;" alt="">
+                <br>
+                <strong>Inicia sesión</strong>
+                <p>sistema de gestión acedémico</p>
+
+                <div class="loader" style="display:none">
+                    <img src="~/Img/abc.gif" alt="" style="width: 50px;height:50px;">
+                </div>
+            </div>
+            <div id="incorecto" class="alert alert-danger sm" role="alert" hidden>
+                contraseña/usurio no coisiden!
+            </div>
+            <div id="Rolincort" class="alert alert-danger sm" role="alert" hidden>
+                Rol no pertenece al user!
+            </div>
+            <div id="notif" class="alert alert-danger " role="alert" hidden>
+                su cuenta está inactivo!
+            </div>
+
+            <div id="llenecamp" class="alert alert-danger" role="alert" hidden>
+                Llene los campos vacios!
+            </div>
+
+            <input type="text" asp-for="Codigo" placeholder="Usuario" autofocus id="Codigo" autocomplete="null" value="002017">
+
+            <input type="password" asp-for="Pass" placeholder="password" id="Pass" value="holamundo">
+
+
+            <select class="js-example-basic-single" name="state" id="IdRoles">
+
+
+                <option value="" style="background-color:#81DAF5;">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seleccione</strong>
+                </option>
+                <option value="1">&nbsp;ADMIN TI</option>
+                <option value="2">&nbsp;ADMIN</option>
+                <option value="3">&nbsp;DOCENTE</option>
+                <option value="3">&nbsp;ALUMNO</option>
+            </select>
+            <br>
+            <input type="submit" name="login" value="INGRESAR" onclick="VerificarUsuario()">
+
+        </fieldset>
+
+    </div>
+
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/usuario.js"></script>
+
+    <script>
+        Codigo.focus();
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+﻿@*@model IEnumerable<Entities.Entities.Paremet>*@
+@{
+    ViewBag.Title = "Listado Paramets";
+}
+
+
+<div id="buttCreate" class="">
+    <div class="alert  alert-info" role="alert" _bl_1099="">
+        <h5>WELCOME VIEW SETING</h5>
+    </div>
+</div>
+
+@model ParemetViewModels
+
+<table class="table table-sm  table-responsive-sm" id="htmlTable" style=" border-collapse: collapse;">
+    <caption>Lista </caption>
+    <thead class=" thead-drak" bgcolor=" #ea899a" style="color: #ffffff">
+        <tr>
+            <th scope="col">N°</th>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Acci&oacute;n</th>
+        </tr>
+    </thead>
+    <tbody id="contenido">
+    </tbody>
+</table>
+
+
+
+<form autocomplete="false" onsubmit="return false" action="#">
+    <div class="modal fade" id="modal_ADD" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><strong>Registro De Usuario</strong></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12">
+                        <div id="llenecamp" class="alert alert-danger" role="alert" style="display:none">
+                            Llene los campos vacios!
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="">Parameto</label>
+                        <input id="Parametid" type="hidden" />
+                        <select class="js-example-basic-single" name="state" id="StatusNuevo" style="width:100%;">
+                            <option value="">--Seleccione--</option>
+                            <option value="1">TRUE</option>
+                            <option value="0">fALSE</option>
+                        </select><br><br>
+                        <br>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <label for="">Aquienes</label>
+                        <select class="js-example1-basic-single" asp-for="RoleId" name="state" id="RoleId" style="width:100%;">
+                            <option value="">--Seleccione--</option>
+                            <option value="1">Superadmin</option>
+                            <option value="2">Administrador</option>
+                            <option value="3">Demoadmin</option>
+                        </select><br><br><br>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="Registrar()"><em class="fa fa-check"><strong>&nbsp;Registrar</strong></em></button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><em class="fa fa-close"><strong>&nbsp;Cerrar</strong></em></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@*
+    <table class="table table-sm  table-responsive-sm" id="htmlTable" style=" border-collapse: collapse;">
+    <caption>Lista </caption>
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ParemetName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                    <td>@Html.DisplayFor(modelItem => item.idrol)</td>
+                    <td style="text-align:center;width:100px" class="">
+                        <div class="d-flex align-items-center">
+                            <a class="btn btn-primary btn-sm" asp-action="Edit" role="button" asp-route-id="">Editar</a><br>
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" role="button" asp-route-id="">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+*@
+@*@(await Controller.InvokeAsync<GetParamets()>())*@
+
+
+
+@section scripts{
+
+
+    <script>
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+            $('.js-example1-basic-single').select2();
+            listar_Paraments();
+        })
+
+
+    </script>
+}

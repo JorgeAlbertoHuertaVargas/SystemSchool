@@ -1,0 +1,23 @@
+{
+  "Register": "Register",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "Cancel": "Cancel",
+  "Reset": "Reset",
+  "Title": "Level List",
+  "Codigo": "Code",
+  "Nombres": "Names",
+  "Apellidos": "Surname",
+  "Correo": "Mail",
+  "Contrasena": "Password",
+  "ConfirmarContrasena": "Confirm Password",
+  "Grado": "Degree",
+  "Seccion": "Section",
+  "Apoderado": "Attorney",
+  "Accion": "Action",
+  "Telefono": "Phone",
+  "Usuario": "User",
+  "List_Teacher": "List of Teachers",
+  "Table_Teachers": "Table of Teachers",
+  "Add_Teacher": "Add Teacher"
+}

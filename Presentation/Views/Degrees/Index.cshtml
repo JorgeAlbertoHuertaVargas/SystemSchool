@@ -1,0 +1,142 @@
+﻿@using Entities.Entities
+@{
+    ViewBag.Title = "Index";
+    Course Cursos = new Course();
+
+}
+
+@model DegreeViewModels
+
+
+<div id="ErrorAlert" class="alert alert-danger" style="display:none" role="alert">
+    <small id="Mensenger"></small>
+</div>
+<div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4" style="border-radius:10px">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 id="titlenew" class="text" style="color: #7F8C8D "> <strong>New Degree</strong></h6>
+                <h6 id="titleEdit" style="display:none" class="text-info"> <strong>Edit Degre</strong></h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+
+                <form id="AjaxForm" autocomplete="false" onsubmit="return false" action="#">
+                    <input asp-for="Degree.IdDegree" id="IdDegree" class="form-control input-sm" hidden />
+
+                    <div id="NombreExiste" class="form-group small" style="display:none">
+                        <div class="alert alert-danger alert-dismissible mr-2">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Name already exists!</strong>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Degree Name</label>
+                        <input asp-for="Degree.DegreeName" id="DegreeName" class="form-control input-sm" autofocus />
+                        <span asp-validation-for="Degree.DegreeName" class="text" style="color:deeppink"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="MiddleName">Creation Date</label>
+                        <input type="datetime" asp-for="Degree.DegreeDateCreated" id="DegreeDateCreated" class="form-control input-sm" readonly />
+                        <span asp-validation-for="Degree.DegreeDateCreated" class="text" style="color:deeppink"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="LastName">N° Students </label>
+                        <input type="number" asp-for="Degree.NumStudent" id="NumStudent" class="form-control input-sm" placeholder="" />
+                        <span asp-validation-for="Degree.NumStudent" class="text" style="color:deeppink"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Level</label><br />
+                        <select id="LevellId" class="pc form-control" asp-for="Degree.LevellId">
+                        </select><span asp-validation-for="Degree.LevellId" class="text" style="color:deeppink"></span>
+                    </div>
+                    <div class="form-group">
+                        <button id="ButtCreat" onclick="RegisterGrados();" class="btn" style="background: #7F8C8D "><strong style="color:azure">Save</strong></button> &nbsp;&nbsp;
+                        <button id="ButtUpdate" style="display:none" onclick="RegisterGrados();" class="btn btn-info"> Update </button> &nbsp;&nbsp;
+                        <button id="ButtLipiar" style="display: none; background: #e4007c " onclick="ButtCancelar();" class="btn"><strong style="color:azure">Clear</strong></button>
+                    </div>
+                </form>
+                <!--MENSAJES-->
+                <div id="Chekname" class="alert alert-danger" style="display:none" role="alert">
+                    Name already exists!
+                </div>
+                <div id="ExitoAlert" class="alert alert-success" style="display:none" role="alert">
+                    successful registration
+                </div>
+                <div id="LLeneCmpVacio" class="alert alert-warning" style="display:none" role="alert">
+                    Fill in the empty fields!
+                </div>
+                <div id="NoAction" class="alert alert-info" style="display:none" role="alert">
+                    The action was not!
+                </div>
+                <!--FIN MENSAJES-->
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Pie Chart -->
+    <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4" style="border-radius:10px">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text" style="color: #7F8C8D "><strong>List Degrees</strong></h6>
+                <div class="dropdown no-arrow">
+                    <input id="BuscadorFilter" class="input-sm" style="display: none; border-radius: 10px; border: 1px solid #ff1493; " onkeyup="Buscar();" />
+                    <a class="dropdown-toggle" onclick="Actibarbuscador();">
+                        <em class="fas fa-search fa-sm " style="color: #ff1493"></em>
+                    </a>
+
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <div class=" table-responsive">
+                        <table class="table table-sm " id="htmlTable" style=" border-collapse: collapse;">
+                            <caption>Grados activos</caption>
+                            <thead class=" thead-drak" style="color: #ffffff;Background: #ea899a">
+
+                                <tr>
+                                    <th scope="col">N°</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">N° Estudients</th>
+                                    <th scope="col">Level</th>
+                                    <th scope="col">Acci&oacute;n</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="contenido">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="container" style=" height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <img class="item" id="loader" src="~/Img/Loading_2.gif" alt="" style="width: 50px; height: 50px; display:none">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pie Chart -->
+</div>
+
+
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/DegreeScript.js"></script>
+    <script>
+        $(document).ready(function () {
+            listar_Grados();
+            Listar_Combo_Level();
+        })
+
+
+    </script>
+}

@@ -1,0 +1,62 @@
+﻿@using Entities.Entities
+@{
+    ViewBag.Title = "Index";
+}
+<div id="buttCreate" class="">
+    <div class="alert  alert-info" role="alert" _bl_1099="">
+        <h5>WELCOME VIEW API</h5>
+    </div>
+</div>
+<div class="container" style=" height: 50px; display: flex; align-items: center; justify-content: center;">
+    <img class="item" id="loaderConsul" src="~/Img/abc.gif" alt="" style="width: 50px; height: 50px; display:none; ">
+</div>
+<form id="AjaxForm" autocomplete="false" onsubmit="return false" action="#">
+    <div class="row m-4">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>INGRESE SU DNI:</label>
+                            <input type="number" id="ConsultDNI" class="form-control input-sm" value="33562459" autofocus />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>APELLIDO PATERNO:</label>
+                            <input type="text" id="apellidopater" class="form-control input-sm" autofocus />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>APELLIDO MATERNO:</label>
+                            <input type="text" id="textApellm" class="form-control input-sm" autofocus />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>NOMBRES:</label>
+                            <input type="text" id="textName" class="form-control input-sm" autofocus />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group float-right">
+                        <button onclick="Verificar_JNE()" type="submit" class="btn btn-info" disabled>JNE</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group float-right">
+                        <button id="ButtnSearch" onclick="Verificar_DNI()" type="submit" class="btn btn-info">DNI</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/ApiScript.js"></script>
+    <script>
+        $(document).ready(function () {
+
+        })
+
+    </script>
+}

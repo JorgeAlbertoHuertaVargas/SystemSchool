@@ -1,0 +1,205 @@
+﻿
+@using Microsoft.AspNetCore.Http
+
+
+@if (string.IsNullOrEmpty(Context.Session.GetString("Portal.UserName")))
+      {
+          <script> window.location = "Login";</script>
+
+    }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Presentation</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/sass.css">
+    <link rel="stylesheet" href="~/css/layets.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.bootstrap.min.css">
+
+
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <!-- --NAVBAR---- -->
+        <div class="header-container fixed-top">
+            <header class="header  navbar navbar-expand-sm expand-header">
+                <div class="header-left d-flex">
+                    <div class="logo">
+                        System School
+                    </div>
+                    <a href="#" class="sidebarCollapse" id="toogleSidebar" data-placement="bottom">
+                        <span class="fas fa-bars"></span>
+                    </a>
+                </div>
+                <ul class="navbar-item flex-row ml-auto">
+                    <li class="nav-item dropdown user-profile-dropdown">
+                        <a href="" class="nav-link user" id="Notify" data-bs-toggle="dropdown">
+                            2021-1 <em class="fa fa-fw fa-flag"></em>
+                        </a>
+
+                        <div class="dropdown-menu">
+                            <div class="dp-main-menu">
+                                <p class="text-center" style="color: #1ab394">Semestre Academico 2021-1</p>
+
+                            </div>
+                        </div>
+
+                    <li class="nav-item dropdown user-profile-dropdown">
+                        <a href="" class="nav-link user" id="Notify" data-bs-toggle="dropdown">
+                            <img src="~/img/profile.svg" alt="" class="icon">
+                        </a>
+
+                        <div class="dropdown-menu">
+                            <div class="user-profile-section">
+                                <div class="media mx-auto">
+                                    <img src="~/img/profile.svg" alt="" class="img-fluid mr-2">
+                                    <div class="media-body">
+                                        <h5>@Context.Session.GetString("Portal.UserName")</h5>
+                                        <p><small> @Context.Session.GetString("Portal.RoleName")</small></p>
+                                        <p><small> @Context.Session.GetString("Portal.Codigo")</small></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dp-main-menu">
+                                <a href="" class="dropdown-item"><span class="fas fa-user"></span>Profile</a>
+                                <a href="" class="dropdown-item"><span class="fas fa-inbox"></span>Inbox</a>
+                                <a href="" class="dropdown-item"><span class="fas fa-lock-open"></span>Look Screen</a>
+                                <a asp-controller="Login" asp-action="Logout" class="dropdown-item"><span class="fas fa-outdent"></span>Log Out</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown user-profile-dropdown">
+                        <a href="" class="nav-link user" id="Notify" data-bs-toggle="dropdown">
+                            <img src="~/img/settings.svg" alt="" class="icon">
+                        </a>
+
+                        <div class="dropdown-menu">
+                            <div class="dp-main-menu">
+                                <a asp-controller="ParametersSystem" asp-action="Index" class="dropdown-item"><span class="fas fa-plug"></span>Idioma</a>
+                                <a href="" class="dropdown-item"><span class="fas fa-users"></span>Admins</a>
+                                <a href="" class="dropdown-item"><span class="fas fa-object-ungroup"></span>Design Type</a>
+                                <a href="" class="dropdown-item"><span class="fas fa-palette"></span>Color</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </header>
+        </div>
+        <!-- --NAVBAR END---- -->
+        <!-- ------------------SIDEBAR START----------- -->
+        <div class="left-menu">
+            <div class="menubar-content">
+                <nav class="animated bounceInDown">
+                    <ul id="sidebar">
+                        <li class="active">
+                            <a href="#"> <em class="fas fa-home"></em>Home</a>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="#">
+                                <em class="fas fa-users"></em> Maestros
+                                <div class="fa fa-caret-down right"></div>
+                            </a>
+                            <ul class="left-menu-dp">
+                                <li><a asp-controller="Teacher" asp-action="Index"><em class="fas fa-user-circle"></em>Listado de Maestros</a></li>
+                                <li><a asp-controller="Teacher" asp-action="Create"><em class="fas fa-id-card"></em>Agregar Maestros</a></li>
+                            </ul>
+                        </li>
+                        <li class="sub-menu">
+                            <a href="#">
+                                <em class="fas fa-user-graduate"></em> Alumnos
+                                <div class="fa fa-caret-down right"></div>
+                            </a>
+                            <ul class="left-menu-dp">
+                                <li><a asp-controller="Alumno" asp-action="Registrar"><em class="fas fa-user-circle"></em>&nbsp; Registrar</a></li>
+                                <li><a asp-controller="Alumno" asp-action="Listar"><em class="fas fa-list-ol"></em>&nbsp; Listar</a></li> 
+                                <li><a asp-controller="Retirados" asp-action="Index"><em class="fas fa-user-minus"></em>&nbsp; Retirados</a></li>
+                            </ul>
+                        </li>
+
+                        @if (!string.IsNullOrEmpty(Context.Session.GetString("Portal.UserName")))
+                        {
+                            <li class="sub-menu">
+                                <a href="#">
+                                    <em class="fas fa-list"></em> Grados
+                                    <div class="fa fa-caret-down right"></div>
+                                </a>
+                                <ul class="left-menu-dp">
+                                    <li><a asp-controller="Degrees" asp-action="Index"><em class="fas fa-circle"></em>&nbsp;Degres</a></li>
+                                    <li><a asp-controller="Degrees" asp-action="Seting"><em class="fas fa-circle"></em>&nbsp;Seting</a></li>
+
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a asp-controller="Courses" asp-action="Index"> <em class="fa fa-google-wallet"></em> Courses</a>
+                            </li>
+                        }
+                        <li>
+                            <a asp-controller="Levell" asp-action="Crear"> <em class="fas fa-graduation-cap"></em> Nivel</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Section" asp-action="Index"> <em class="fab fa-uikit"></em> Seccion</a>
+                        </li>
+
+                        
+                        <li>
+                            <a asp-controller="API" asp-action="Index"> <em class="fab fa-telegram-plane"></em> Consulta</a>
+                        </li>
+
+                        
+
+                        <li>
+                            <a asp-controller="Calendario" asp-action="Index"> <em class="fas fa-calendar-alt"></em> Calendario</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- ------------------SIDEBAR END----------- -->
+
+        <div class="content-wrapper">
+            <section class="dashboard-top-sec">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-sm-12">
+                            @RenderBody()
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+ 
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://kit.fontawesome.com/edb50c3e17.js" crossorigin="anonymous"></script>
+    <script src="~/js/DataTable.js"></script>
+    <script src="~/js/sweetalert2/sweetalert2.all.js"></script>
+    <script src="~/js/dataTables.responsive.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+</body>
+
+
+</html>

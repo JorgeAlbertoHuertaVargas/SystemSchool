@@ -1,0 +1,242 @@
+﻿@model IEnumerable<Entities.Entities.Alumno>
+
+@{
+    ViewBag.Title = "Listar";
+
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text" style="color: #7F8C8D "><en class="fa fa-fw fa-filter"></en>BUSCAR / FILTRAR</h6>
+
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area row">
+               
+                        <div class="col-md-3">
+                            <label for="validationCustom04" class="form-label">Grado</label>
+                            <select class="form-control" id="Id_Grado_Filtrar" required>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationCustom04" class="form-label" >Seccion</label>
+                            <select class="form-control" id="Section_Filter" required>
+                            </select>
+                          
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationCustom01" class="form-label">Estudiante</label>
+                            <input type="text" class="form-control" id="NameEstudiante" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="validationCustom01" class="form-label">Correo</label>
+                            <input type="text" class="form-control" id="CorreoEstudiante" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div><br />
+                        <div class="col-md-3">
+                            <label for="validationCustom01" class="form-label">Codigo</label>
+                            <input type="text" class="form-control" id="CodigoEstudiante" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-sm-offset-4 col-sm-7" style="align-content:center">
+                            <label>&nbsp;</label><br>
+                            <button type="submit" class="btn filter_Alumno" style="font-family: 'Times New Roman', Times, serif; background: #7F8C8D; color:aliceblue;">
+                                <en id="spiner-span"></en> Buscar / Filtrar
+                            </button>
+                        </div>
+
+
+
+                    <script>
+                        (function () {
+                            'use strict'
+
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.querySelectorAll('.needs-validation')
+
+                            // Loop over them and prevent submission
+                            Array.prototype.slice.call(forms)
+                                .forEach(function (form) {
+                                    form.addEventListener('submit', function (event) {
+                                        if (!form.checkValidity()) {
+                                            event.preventDefault()
+                                            event.stopPropagation()
+                                        }
+
+                                        form.classList.add('was-validated')
+                                    }, false)
+                                })
+                        })();
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-2 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text" style="color: #7F8C8D "><en class="fas fa-user-graduate"></en>  Estudiantes</h6>
+
+            </div>
+           <!-- Card Body -->
+            <div class="card-body" id="FilterAlumno">
+                <button type="button" class="btn btn-danger p2 retirar" data-toggle="modal" data-target="#retirados" style="font-family:'Times New Roman', Times, serif">
+                    <en class="fas fa-share-square"></en> Retirar Estudiantes
+                </button>
+
+                <table class="table table-sm table-borderless py-1" id="tablass">
+                    <caption>Listado de registro de Alumnos</caption>
+                    <thead class=" thead-drak ">
+                        <tr>
+                            <th scope="col">Acciones</th>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Nombres</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Grado</th>
+                            <th scope="col">Seccion</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="text-align:center;" tabindex="0" class="sorting_1">
+
+                                    <input type="checkbox" class="input_estudiantes" name="estudiantes[]" value="@Html.DisplayFor(modelItem => item.IdAlumno)">
+
+                                    <button type="button" class="btn btn-primary" style="padding: 1px 5px; font-size: 12px; line-height: 1.5; border-radius: 3px; ">
+                                        <span class="fa fa-user"></span>|<span class="fa fa-fw fa-money"></span>
+                                    </button>
+
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Nombres)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Apellidos)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Correo)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Degree.DegreeName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Sections.SectionName)</td>
+                            </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+                <div id="spinner"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="retirados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header py-2" style="background: #ea899a; ">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: white; font-family: 'Times New Roman', Times, serif"> <en class="fas fa-share-square"></en> Retirar Estudiante Seleccionado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="DateCreated" id="DateCreated">
+                    <input type="hidden" name="nombreAlumno" id="nombreAlumno">
+                    <input type="hidden" name="idAlumno" id="idAlumno">
+                    <input type="hidden" name="codigoAlumno" id="codigoAlumno">
+                    <input type="hidden" name="apellidoeAlumno" id="apellidoeAlumno">
+                    <input type="hidden" name="correolumno" id="correolumno">
+                    <input type="hidden" name="id_Usuario" id="id_Usuario">
+                    <input type="hidden" name="id_gradoAlumno" id="id_gradoAlumno">
+                    <input type="hidden" name="id_seccionAlumno" id="id_seccionAlumno">
+                    <input type="hidden" name="id_enceAlumno" id="id_enceAlumno">
+                    <table class="table table-bordered table-striped m-t-10">
+                        <caption></caption>
+                        <thead style="display:none;"><tr><th scope="col"></th><th scope="col"></th></tr></thead>
+                        <tbody>
+
+                            <tr>
+                                <td>Razón de retiro</td>
+                                <td>
+                                    <select class="select21 select2-hidden-accessible form-control" name="motivo" id="motivo" required="" tabindex="-1" aria-hidden="true">
+                                        <option disabled="">MOTIVO DE RETIRO DEL ALUMANO</option>
+                                        <option value="Busca mejores servicios">Busca mejores servicios</option>
+                                        <option value="Cambio de residencia">Cambio de residencia</option>
+                                        <option value="Cambio de Plan">Cambio de Plan</option>
+                                        <option value="Cambio de Taller">Cambio de Taller</option>
+                                        <option value="Cambio de Tanda">Cambio de Tanda </option>
+                                        <option value="Inscrito por error">Inscrito por error</option>
+                                        <option value="Motivo personales">Motivo personales</option>
+                                        <option value="No tenemos el Taller">No tenemos el Taller</option>
+                                        <option value="No deseado en el establecimiento">No deseado en el establecimiento</option>
+                                        <option value="Perdió el año">Perdió el año</option>
+                                        <option value="Razón financiero">Razón financiero</option>
+                                        <option value="Otros">Otros</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Descripción</td>
+                                <td>
+                                    <textarea style="width: 100%; resize: none;height: 80px; font-size: 13px;" name="Descripción" id="Descripción">	</textarea>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="modal-footer py-2">
+                    <button style="color:#fff;font-family: 'Times New Roman', Times, serif" class="btn btn-info  RetirarAlumno" type="button">Aceptar</button>
+                    <button type="button" style="Background: #e4007c; color: #fff; font-family: 'Times New Roman', Times, serif" class="btn btn-secondary" data-dismiss="modal" name="cancelar">Cancelar</button>
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/RetirarAlumno.js"></script>
+    <script src="~/js/Alumno.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            listar_Seccion();
+            listar_Grado();
+        })
+
+    </script>
+
+}
+

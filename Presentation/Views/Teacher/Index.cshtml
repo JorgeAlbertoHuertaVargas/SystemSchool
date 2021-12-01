@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Entities.Entities.Teacher>
+@using Presentation.Models.Language
+
+@{
+    ViewData["Title"] = "Teacher";
+    LanguageModelButtons LanguageButtons = new LanguageModelButtons().GetLanguageForView();
+}
+
+
+<div class="subheader d-flex flex-direction-row justify-content-between mb-3">
+    <div>
+        <h1>@LanguageButtons.List_Teacher</h1>
+    </div>
+    <div class="d-flex align-items-center">
+        <a class="btn btn-outline-primary btn-sm" asp-action="Create" role="button">@LanguageButtons.Add_Teacher</a>
+    </div>
+</div>
+
+<div class="row m-4">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header" style="background: #d12d7b; ">
+                <h8 class="card-title" style="color:white; text-align:center">@LanguageButtons.Table_Teachers</h8>
+            </div>
+            <div class="card-body">
+                <table class="table table-responsive-sm">
+                    <caption>@LanguageButtons.List_Teacher</caption>
+                    <thead class="card-header py-2">
+                        <tr>
+                            <th scope="col" style="text-align:center">
+                                @LanguageButtons.Accion
+                            </th>
+                            <th scope="col">
+                                @LanguageButtons.Nombres
+                            </th>
+                            <th scope="col">
+                                @LanguageButtons.Apellidos
+                            </th>
+                            <th scope="col">
+                                @LanguageButtons.Telefono
+                            </th>
+                            <th scope="col">
+                                @LanguageButtons.Usuario
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="Table_Teacher">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="EditTeacher" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><em class="fas fa-pencil-alt"></em>@LanguageButtons.Edit Profesor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="hidden" name="id" id="IdTeacher" />
+                        <input type="hidden" name="id" id="IdUserr" />
+
+                        <label class="col-form-label">@LanguageButtons.Nombres</label>
+                        <input id="EditName" name="EName" class="form-control" placeholder="Nombre del profesor" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">@LanguageButtons.Apellidos</label>
+                        <input id="EditLastName" name="ELastName" class="form-control" placeholder="Apellido" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">@LanguageButtons.Telefono</label>
+                        <input id="EditPhone" name="EPhone" class="form-control" placeholder="Telefono" required>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@LanguageButtons.Cancel</button>
+                        <button type="submit" class="btn btn-primary" onclick="Update_Teacher();">@LanguageButtons.Register</button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+<partial name="_NotificationPartial" />
+
+@section scripts{
+    <script src="/js/TeacherScript.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            GetAllTeacher();
+        })
+
+    </script>
+
+}

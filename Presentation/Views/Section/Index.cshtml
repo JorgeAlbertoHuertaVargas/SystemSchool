@@ -1,0 +1,152 @@
+﻿@model Entities.Entities.Section
+@using Presentation.Models.Language
+
+@{
+    ViewBag.Title = "Crear";
+    LanguageModelButtons LanguageButtons = new LanguageModelButtons().GetLanguageForView();
+}
+
+<div class="mt-4">
+
+
+    <span id="Message" class="d-none">@TempData["Mensaje"]</span>
+    <span id="MessageInfo" class="d-none">@TempData["MensajeInfo"]</span>
+    <div class="row" style="width:100%;">
+
+        <div class="col">
+            <h2 class="text-primary">Listado de Secciones</h2>
+        </div>
+        <div class="col-2 text-right">
+            <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#Section">Agregar Sección</button>
+
+        </div>
+
+    </div>
+
+
+    <div class="row m-4">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header" style="background: #d12d7b; ">
+                    <h8 class="card-title" style="color:white; text-align:center">Tabla de Section</h8>
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive-sm" aria-label="Table_Section">
+                        <thead class="card-header py-2">
+                            <tr>
+                                <th scope="col">N°</th>
+                                <th scope="col">Nombre Sección</th>
+                                <th scope="col">Detalle</th>
+                                <th scope="col">@LanguageButtons.Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="Tabla-Section">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Section" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #d12d7b; ">
+                <h5 class="modal-title" id="exampleModalLabel">Registrar Section</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form asp-action="Create">
+                <div class="modal-body">
+
+                    <div class="form-group col-11">
+                        <label asp-for="SectionName" class="control-label"></label>
+                        <input asp-for="SectionName" class="form-control" / required>
+                        <span asp-validation-for="SectionName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-11">
+                        <label asp-for="Detail" class="control-label"></label>
+                        <input asp-for="Detail" class="form-control" / required>
+                        <span asp-validation-for="Detail" class="text-danger"></span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="modal fade" id="EditSection" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #d12d7b; ">
+                <h5 class="modal-title" id="exampleModalLabel"><em class="fas fa-pencil-alt"></em>Editar Sección</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="hidden" name="id" id="IdSection" />
+                        <label class="col-form-label">Nombre de la Sección</label>
+                        <input id="EditName" name="EName" class="form-control" placeholder="Nombre de la Sección">
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Detalle:</label>
+                        <input id="EditDetail" name="EDetail" class="form-control" placeholder="Detalle">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" onclick="Update_Section();">Registrar</button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts{
+
+    <script src="~/js/SectionScrip.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            GetAllSect();
+            var message = $('#Message').text();
+            var messageInfo = $('#MessageInfo').text();
+
+            if (message == 'Successfully') {
+                toastr.success("Your request has been successfully added.", 'Success Alert', { timeout: 100 });
+            }
+        })
+    </script>
+
+}
+
+
+

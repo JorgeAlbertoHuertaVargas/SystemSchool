@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Entities.Entities.Retirado>
+@{
+    ViewBag.Title = "Listar Retirados";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1 style="font-family: 'Source Sans Pro', sans-serif; font-size: 24px;"> Estudiantes Retirados</h1>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb py-1">
+                <li class="breadcrumb-item"><a href="#"><en class="fa fa-home"></en> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Alumnos</a></li>
+                <li class="breadcrumb-item" aria-current="page">Retirados</li>
+            </ol>
+        </nav>
+    </div><br />
+
+          <div class="col-sm-12">
+              <div class="card shadow mb-4">
+                  <!-- Card Header - Dropdown -->
+                  <div class="card-header py-2" style="background:black;">
+                      <h8 class="card-title" style="color:white;"><em class="fas fa-user-graduate"></em> Lista de Alumnos Retirados</h8>
+                  </div>
+                  <!-- Card Body -->
+                  <div class="card-body">
+
+                      <table class="table table-sm table-responsive-sm  dtr-inline " role="grid">
+                          <caption >Alumnos Retirados</caption>
+                          <thead>
+                              <tr>
+                                  <th scope="col" style="width:10px;">Acciones</th>
+                                  <th scope="col" style="width:14px;">Codigo</th>
+                                  <th scope="col" scope="col" style="width:14px;">Estudiante</th>
+                                  <th scope="col" style="width:10px;">Grado</th>
+                                  <th scope="col" style="width:10px;">Seccion</th>
+                                  <th scope="col" style="width:14px;">Razon de retiro</th>
+                                  <th scope="col" tyle="width:10px;">Observaciones</th>
+                                  <th scope="col" style="width:10px;">Fecha</th>
+                              </tr>
+                          </thead>
+
+                          <tbody>
+
+                              @foreach (var item in Model)
+                              {
+                                  <tr role="row" class="odd">
+                                      <td style="text-align:center;" tabindex="0" class="sorting_1">
+                                          <button style="color:white; padding: 2px 5px; font-size: 12px; line-height: 1.5; border-radius: 3px;" class="btn btn-danger">Restaurar</button>
+                                      </td>
+                                      <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+                                      <td>@item.Nombres @item.Apellidos</td>
+                                      <td>@item.Degree.DegreeName</td>
+                                      <td>@item.Sections.SectionName</td>
+                                      <td>@item.Motivo</td>
+                                      <td>@item.Descripcion</td>
+                                      <td>@item.DateTimeRetiro</td>
+                                  </tr>
+                              }
+
+                          </tbody>
+
+                      </table>
+                  </div>
+              </div>
+
+          </div>
+</div>
